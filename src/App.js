@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import Headline from './Headline.js';
 import InputComp from './InputComp.js';
+import * as firebase from 'firebase';
+var app = firebase.initializeApp({
+    apiKey: "AIzaSyDhUxeO5qWbw16nCfApKkObr4_ULEcduJk",
+    authDomain: "slanguage-dictionary.firebaseapp.com",
+    databaseURL: "https://slanguage-dictionary.firebaseio.com",
+    projectId: "slanguage-dictionary",
+    storageBucket: "slanguage-dictionary.appspot.com",
+    messagingSenderId: "953574413174"
+  });
 
 class App extends Component {
 
@@ -52,13 +61,20 @@ class App extends Component {
       currentEnglish: '',
       currentChineseSentence: '',
       currentEnglishSentence: '',
+      // history of word?
+      // tags like urban dictionary?
     }
+
+
   }
 
   // functions go Here
 
   showNames = () => {
-      return this.state.newSlang.map((slang) => (
+      return Object.keys(this.state.newSlang).map((slang) => {
+        const slangs = this.state.newSlang;
+        slang = slangs[slang];
+        return(
         <div className="box">
           <p id="line1"><b>{slang.chinese}</b></p>
           <p><b>Pinyin:</b> {slang.pinyin}</p>
@@ -66,7 +82,9 @@ class App extends Component {
           <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>
           <p><b>English Example Sentence: </b> {slang.englishSentence}</p>
         </div>
-      ));
+      )
+      }
+    );
   }
 
 addThings = (message, label) => {
@@ -89,8 +107,22 @@ addThings = (message, label) => {
 
 submitThings = () => {
   let newArray = {chinese: this.state.currentChinese, pinyin: this.state.currentPinyin, english: this.state.currentEnglish, chineseSentence: this.state.currentChineseSentence, englishSentence: this.state.currentEnglishSentence}
-  let slangArray = this.state.newSlang.concat(newArray);
-  this.setState({newSlang: slangArray})
+
+  // let slangArray = this.state.newSlang.concat(newArray);
+  // this.setState({newSlang: slangArray})
+
+  firebase.database().ref("single-value").push(newArray);
+
+
+}
+
+componentDidMount() {
+  firebase.database().ref("single-value").on("value", (snapshot) => {
+    console.log(snapshot.val());
+    this.setState({
+      newSlang: snapshot.val()
+    })
+  });
 }
 
   render() {
