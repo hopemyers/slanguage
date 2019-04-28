@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Headline from './Headline.js';
 import InputComp from './InputComp.js';
+import Search from './Search.js';
 import * as firebase from 'firebase';
 var app = firebase.initializeApp({
     apiKey: "AIzaSyDhUxeO5qWbw16nCfApKkObr4_ULEcduJk",
@@ -25,35 +26,40 @@ class App extends Component {
           pinyin: "Chī tǔ",
           english: 'broke, poor',
           chineseSentence: '我不去逛街了，最近要吃土了',
-          englishSentence: "I can't go shopping, I've been broke recently"
+          englishSentence: "I can't go shopping, I've been broke recently",
+          pictureURL: ''
         },
         {
           chinese: "小鲜肉",
           pinyin: "Xiǎo xiānròu",
           english: 'Young handsome boy',
           chineseSentence: '昨天我看到一个小鲜肉，好帅！',
-          englishSentence: "Yesterday, I saw a young handsome boy, and he is so gorgeous!"
+          englishSentence: "Yesterday, I saw a young handsome boy, and he is so gorgeous!",
+          pictureURL: ''
         },
         {
           chinese: "牛",
           pinyin: "Niú",
           english: 'Cool, awesome',
           chineseSentence: 'A:我这礼拜赚了一百万块。B: 你真牛',
-          englishSentence: "A: I earned 1 million dollars this week. B: Wow, you are so cool."
+          englishSentence: "A: I earned 1 million dollars this week. B: Wow, you are so cool.",
+          pictureURL: ''
         },
         {
           chinese: "萌",
           pinyin: "Méng",
           english: 'cute',
           chineseSentence: '这个女生真萌',
-          englishSentence: "This girl is so cute"
+          englishSentence: "This girl is so cute",
+          pictureURL: ''
         },
         {
           chinese: "戏精",
           pinyin: "Xìjīng",
           english: 'Drama queen, attention whore',
           chineseSentence: '身边有一群戏精朋友真的是让人崩溃',
-          englishSentence: "Having a group of attention whores around really drives people crazy"
+          englishSentence: "Having a group of attention whores around really drives people crazy",
+          pictureURL: ''
         },
       ],
       currentChinese: '',
@@ -61,6 +67,7 @@ class App extends Component {
       currentEnglish: '',
       currentChineseSentence: '',
       currentEnglishSentence: '',
+      currentURL: '',
       // history of word?
       // tags like urban dictionary?
     }
@@ -81,6 +88,7 @@ class App extends Component {
           <p><b>English Definition: </b>{slang.english}</p>
           <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>
           <p><b>English Example Sentence: </b> {slang.englishSentence}</p>
+          <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>
         </div>
       )
       }
@@ -103,10 +111,13 @@ addThings = (message, label) => {
   else if (label==="englishSentence") {
     this.setState({currentEnglishSentence: message})
   }
+  else if (label==="pictureURL") {
+    this.setState({currentURL: message})
+  }
 }
 
 submitThings = () => {
-  let newArray = {chinese: this.state.currentChinese, pinyin: this.state.currentPinyin, english: this.state.currentEnglish, chineseSentence: this.state.currentChineseSentence, englishSentence: this.state.currentEnglishSentence}
+  let newArray = {chinese: this.state.currentChinese, pinyin: this.state.currentPinyin, english: this.state.currentEnglish, chineseSentence: this.state.currentChineseSentence, englishSentence: this.state.currentEnglishSentence, pictureURL: this.state.currentURL}
 
   // let slangArray = this.state.newSlang.concat(newArray);
   // this.setState({newSlang: slangArray})
@@ -137,8 +148,11 @@ componentDidMount() {
           <InputComp change={this.addThings} label='english' placeholder="English..."></InputComp>
           <InputComp change={this.addThings} label='chineseSentence' placeholder="Chinese example sentence..."></InputComp>
           <InputComp change={this.addThings} label='englishSentence' placeholder="English sentence translation..."></InputComp>
+          <InputComp change={this.addThings} label="pictureURL" placeholder="Picture URL..."></InputComp>
 
           <div id="center"> <button id="submitbutton" onClick={this.submitThings}>Submit </button></div>
+
+          <Search></Search>
 
             <div className="display">
             {this.showNames()}
