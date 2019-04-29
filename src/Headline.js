@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 //EXPLANATION:
 
@@ -12,6 +13,11 @@ import './App.css';
 
 class Headline extends Component {
 
+
+submitWord = () => {
+  this.props.change();
+}
+
   render() {
     return (
       <div className="headline">
@@ -23,3 +29,5 @@ class Headline extends Component {
 }
 
 export default Headline;
+
+// <button onClick={this.submitWord}>Submit A Word</button>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Search extends Component {
   constructor(props){
@@ -22,8 +23,10 @@ searchWords = () => {
 render() {
   return (
     <div className="inputComp">
-      <input className="input" placeholder="Search..." onChange={this.searchFunction}></input>
+      <input className="searchinput" placeholder="Search..." onChange={this.searchFunction}></input>
       <div id="center"><button id="submitbutton" onClick={this.searchWords}>Search </button></div>
+      <p id="ortext"> or </p>
+      <div id="center"><Link to="/Submit"><button id="submitwordbutton">Submit A New Word</button></Link></div>
     </div>
 );}
 }

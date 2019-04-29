@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import Headline from './Headline.js';
-import InputComp from './InputComp.js';
+import Submit from './Submit.js';
 import Search from './Search.js';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 import * as firebase from 'firebase';
 var app = firebase.initializeApp({
     apiKey: "AIzaSyDhUxeO5qWbw16nCfApKkObr4_ULEcduJk",
@@ -80,6 +82,7 @@ class App extends Component {
   showNames = () => {
       return Object.keys(this.state.newSlang).map((slang) => {
         const slangs = this.state.newSlang;
+        const haspic = this.state.newSlang.pictureURL;
         slang = slangs[slang];
         return(
         <div className="box">
@@ -88,13 +91,14 @@ class App extends Component {
           <p><b>English Definition: </b>{slang.english}</p>
           <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>
           <p><b>English Example Sentence: </b> {slang.englishSentence}</p>
-          <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>
+          {slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>: <p></p>}
         </div>
       )
       }
     );
   }
 
+// ternary operator, if link show image
 addThings = (message, label) => {
   if(label==="chinese"){
     this.setState({currentChinese: message})
@@ -136,35 +140,63 @@ componentDidMount() {
   });
 }
 
+  renderSubmit = () => {
+    return <Submit change={this.addThings} submit={this.submitThings}>   </Submit>
+  }
+
+  searchPage = () => {
+    return <div><Search></Search>
+    {this.showNames()}</div>
+  }
+
   render() {
     return (
-      <div className="App">
+        <Router>
+          <div className="App">
 
-        <Headline text={"Slanguage"}></Headline>
-        <p id="description"> Submit a new word or phrase:</p>
 
-          <InputComp change={this.addThings} label='chinese' placeholder="Chinese characters..."></InputComp>
-          <InputComp change={this.addThings} label='pinyin' placeholder="Pinyin..."></InputComp>
-          <InputComp change={this.addThings} label='english' placeholder="English..."></InputComp>
-          <InputComp change={this.addThings} label='chineseSentence' placeholder="Chinese example sentence..."></InputComp>
-          <InputComp change={this.addThings} label='englishSentence' placeholder="English sentence translation..."></InputComp>
-          <InputComp change={this.addThings} label="pictureURL" placeholder="Picture URL..."></InputComp>
+            <Headline text={"Slanguage"} change={this.submissionPage}></Headline>
 
-          <div id="center"> <button id="submitbutton" onClick={this.submitThings}>Submit </button></div>
 
-          <Search></Search>
 
-            <div className="display">
-            {this.showNames()}
-            </div>
+
+
+            <Route path="/" exact component={this.searchPage} />
+            <Route path="/Headline" exact component={Headline} />
+
+            <Route path="/Submit" exact component={ this.renderSubmit } />
 
             <div id="bottombar">
-            <p id="copyright"> &#9400; NYU Shanghai</p>
-            </div>
+                  <p id="copyright"> &#9400; NYU Shanghai</p>
+                  </div>
 
           </div>
+
+        </Router>
         );
       }
     }
 
 export default App;
+
+
+
+
+// <div className="App">
+//
+//
+//
+//   <Headline text={"Slanguage"} change={this.submissionPage}></Headline>
+//
+//
+//     <Search></Search>
+//
+//       <div className="display">
+//       {this.showNames()}
+//       </div>
+//
+//       <div id="bottombar">
+//       <p id="copyright"> &#9400; NYU Shanghai</p>
+//       </div>
+//
+//     </div>
