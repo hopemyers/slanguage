@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import InputComp from './InputComp.js';
-import home from './images/home.png'
+import home from './images/back.png';
+import star from './images/star.png';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Submit extends Component {
@@ -23,6 +24,11 @@ class Submit extends Component {
     return (
       <div>
       <Link to="/"><img id="homebutton" src={home} alt="home"/></Link>
+      <img id="star1" className="star" src={star} alt="required"/>
+      <img id="star2" className="star" src={star} alt="required"/>
+      <img id="star3" className="star" src={star} alt="required"/>
+      <img id="star4" className="star" src={star} alt="required"/>
+      <img id="star5" className="star" src={star} alt="required"/>
       <p id="description"> Submit a new word or phrase:</p>
 
       <InputComp change={this.props.change} label='chinese' placeholder="Chinese characters..."></InputComp>

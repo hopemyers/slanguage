@@ -106,7 +106,7 @@ body {
   background-color: lightblue;
   font-family: monospace;
   font-size: 150%;
-  margin-bottom: 0%;
+  margin-bottom: 1%;
   border-color: lightgrey;
 }
 
@@ -177,6 +177,41 @@ body {
 position: absolute;
 top: 230px;
 left: 10px;
-width: 80px;
-height: 80px;
+width: 50px;
+height: 50px;
+}
+
+.star {
+  width: 10px;
+  height: 10px;
+}
+
+#star1 {
+  position: absolute;
+  left: 74.5%;
+  top: 50%;
+}
+
+#star2 {
+  position: absolute;
+  left: 74.5%;
+  top: 64.5%;
+}
+
+#star3 {
+  position: absolute;
+  left: 74.5%;
+  top: 79%;
+}
+
+#star4 {
+  position: absolute;
+  left: 74.5%;
+  top: 94%;
+}
+
+#star5 {
+  position: absolute;
+  left: 74.5%;
+  top: 108.5%;
 }

@@ -127,7 +127,7 @@ submitThings = () => {
   // this.setState({newSlang: slangArray})
 
   firebase.database().ref("single-value").push(newArray);
-
+  alert("Thank you for submitting a new word! Try looking it up in the dictionary :)");
 
 }
 
