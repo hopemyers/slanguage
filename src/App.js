@@ -3,6 +3,8 @@ import './App.css';
 import Headline from './Headline.js';
 import Submit from './Submit.js';
 import Search from './Search.js';
+import Browse from './Browse.js';
+import Random from './Random.js';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import * as firebase from 'firebase';
@@ -70,6 +72,13 @@ class App extends Component {
       currentChineseSentence: '',
       currentEnglishSentence: '',
       currentURL: '',
+      searchResult: {
+          chinese: null,
+          pinyin: null,
+          english: null,
+          chineseSentence: null,
+          englishSentence: null,
+          pictureURL: null}
       // history of word?
       // tags like urban dictionary?
     }
@@ -98,7 +107,34 @@ class App extends Component {
     );
   }
 
-// ternary operator, if link show image
+  showSearchResults = (searching) => {
+    let slangFilter = this.state.newSlang;
+    console.log(slangFilter);
+    const filteredResults = Object.keys(this.state.newSlang).filter(key => this.state.newSlang[key].english === searching).map(key => {
+      return this.state.newSlang[key]
+    })
+    console.log(filteredResults);
+    this.setState({ searchResult: filteredResults[0]})
+  }
+
+  renderSearchResults = () => {
+    const slang = this.state.searchResult;
+    console.log(this.state.searchResult);
+
+      if (this.state.searchResult.english !== null){
+        return(
+      <div className="box">
+        <p id="line1"><b>{slang.chinese}</b></p>
+        <p><b>Pinyin:</b> {slang.pinyin}</p>
+        <p><b>English Definition: </b>{slang.english}</p>
+        <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>
+        <p><b>English Example Sentence: </b> {slang.englishSentence}</p>
+        {slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>: <p></p>}
+      </div>
+    )
+      }
+  }
+
 addThings = (message, label) => {
   if(label==="chinese"){
     this.setState({currentChinese: message})
@@ -133,7 +169,7 @@ submitThings = () => {
 
 componentDidMount() {
   firebase.database().ref("single-value").on("value", (snapshot) => {
-    console.log(snapshot.val());
+    // console.log(snapshot.val());
     this.setState({
       newSlang: snapshot.val()
     })
@@ -145,8 +181,13 @@ componentDidMount() {
   }
 
   searchPage = () => {
-    return <div><Search></Search>
-    {this.showNames()}</div>
+    return <div><Search term={this.showSearchResults}></Search>
+   {this.renderSearchResults()} <Random></Random>
+  </div>
+  }
+
+  browseWords = () => {
+    return <Browse showNames={this.showNames}></Browse>
   }
 
   render() {
@@ -159,12 +200,11 @@ componentDidMount() {
 
 
 
-
-
             <Route path="/" exact component={this.searchPage} />
             <Route path="/Headline" exact component={Headline} />
 
             <Route path="/Submit" exact component={ this.renderSubmit } />
+            <Route path="/Browse" exact component={this.browseWords}/>
 
             <div id="bottombar">
                   <p id="copyright"> &#9400; NYU Shanghai</p>

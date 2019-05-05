@@ -12,11 +12,12 @@ class Search extends Component {
 }
 
 searchFunction = (event) => {
-  this.setState({currentSearch: event.target.value})
+  this.setState({search: event.target.value});
+  // this.setState({search: this.state.currentSearch});
 }
 
 searchWords = () => {
-  this.setState({search: this.state.currentSearch})
+  this.props.term(this.state.search);
 }
 
 
@@ -27,6 +28,8 @@ render() {
       <div id="center"><button id="submitbutton" onClick={this.searchWords}>Search </button></div>
       <p id="ortext"> or </p>
       <div id="center"><Link to="/Submit"><button id="submitwordbutton">Submit A New Word</button></Link></div>
+      <p id="ortext"> or </p>
+      <div id="center"><Link to="/Browse"><button id="browsebutton">Browse Dictionary</button></Link></div>
     </div>
 );}
 }
