@@ -9,8 +9,8 @@ class Random extends Component {
 
   render() {
     return (
-      <div className="box">
-      <p id="center" id="line1"> Word of the day </p>
+      <div className="randomWordBox">
+      <p id="center" id="wordOfTheDay"> Word of the day </p>
       <p id="line1"><b>电灯泡</b></p>
       <p><b>Pinyin:</b> Diàn dēng pào</p>
       <p><b>English Definition: </b>Third wheel, unwanted third party on a date</p>

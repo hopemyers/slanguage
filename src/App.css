@@ -29,9 +29,37 @@ body {
   font-size: 120%;
 }
 
+.randomWordBox {
+  border-color: lightblue;
+  border-width: 3px;
+  border-style: solid;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 4%;
+  background-color: white;
+}
+
+.randomWordBox p {
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 110%;
+  margin-bottom: 1.5%;
+  margin-top: 1.5%;
+}
+
+.randomWordBox b {
+  font-size: 120%;
+}
+
 #line1 {
   text-align: center;
   font-size: 150%;
+}
+
+#wordOfTheDay {
+  text-align: center;
+  font-size: 200%;
 }
 
 .headline {
@@ -58,7 +86,10 @@ body {
 .inputComp {
   margin-left: 25%;
   width: 50%;
+}
 
+.searchInputComp {
+  width: 100%;
 }
 
 .input {
@@ -73,11 +104,11 @@ body {
 }
 
 .searchinput {
-  width: 70%;
+  width: 29.25%;
   height: 70px;
-  margin-bottom: 2%;
+  margin-bottom: 0%;
   margin-top: 4%;
-  margin-left: 15%;
+  margin-left: 25%;
   font-size: 100%;
   border-color: lightgrey;
   border-radius: 10px;
@@ -96,64 +127,97 @@ body {
   text-align: center;
 }
 
-#submitbutton {
-  margin-top: 0%;
+#squareSubmitButton {
+  margin-top: 1%;
   text-align: center;
   width: 100px;
   padding-top: 5px;
   padding-bottom: 5px;
-  border-radius: 5px;
   background-color: lightblue;
   font-family: monospace;
   font-size: 150%;
-  margin-bottom: 1%;
+  /* margin-bottom: 1%; */
   border-color: lightgrey;
+  border-width: 2px;
+  border-radius: 10px;
+  margin-left: 2%;
+}
+
+#submitbutton {
+  /* margin-top: 4%; */
+  text-align: center;
+  width: 70px;
+  height: 70px;
+  /* padding-top: 5px;
+  padding-bottom: 5px; */
+  border-radius: 100px;
+  background-color: lightblue;
+  font-family: monospace;
+  font-size: 150%;
+  /* margin-bottom: 1%; */
+  border-color: lightgrey;
+  border-width: 1px;
+  margin-left: 2%;
+  position: relative;
+  bottom: -20px;
 }
 
 #submitwordbutton {
-  margin-top: 1%;
+  /* margin-top: 1%; */
   text-align: center;
-  width: 230px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 5px;
+  width: 70px;
+  height: 70px;
+  /* padding-top: 5px;
+  padding-bottom: 5px; */
+  border-radius: 100px;
   background-color: lightblue;
   font-family: monospace;
   font-size: 150%;
-  margin-bottom: 1%;
+  /* margin-bottom: 1%; */
   border-color: lightgrey;
+  border-width: 1px;
+  margin-left: 2%;
+  position: relative;
+  bottom: -20px;
 }
 
 #browsebutton {
-  margin-top: 1%;
+  /* margin-top: 1%; */
   text-align: center;
-  width: 230px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 5px;
+  width: 70px;
+  height: 70px;
+  /* padding-top: 5px;
+  padding-bottom: 5px; */
+  border-radius: 100%;
   background-color: lightblue;
   font-family: monospace;
   font-size: 150%;
-  margin-bottom: -2%;
+  /* margin-bottom: -2%; */
   border-color: lightgrey;
+  border-width: 1px;
+  margin-left: 2%;
+  position: relative;
+  bottom: -20px;
+}
+
+#squareSubmitButton:hover{
+  border-color: grey;
+  border-width: 2px;
 }
 
 #submitbutton:hover {
   border-color: grey;
-  /* width: 110px;
-  font-size: 155%; */
+  border-width: 2px;
 }
 
 #submitwordbutton:hover {
   border-color: grey;
-  /* width: 110px;
-  font-size: 155%; */
+  border-width: 2px;
 }
 
 #browsebutton:hover {
   border-color: grey;
-  /* width: 110px;
-  font-size: 155%; */
+  border-width: 2px;
 }
 
 #bottombar {
@@ -234,4 +298,18 @@ height: 50px;
   position: absolute;
   left: 74.5%;
   top: 108.5%;
+}
+
+#searchIcon {
+  width: 100%;
+}
+
+#submitIcon {
+  width: 100%;
+  margin-top: 10%;
+}
+
+#browseIcon {
+  width: 100%;
+  margin-top: 10%;
 }

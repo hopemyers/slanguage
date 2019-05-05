@@ -38,7 +38,7 @@ class Submit extends Component {
       <InputComp change={this.props.change} label='englishSentence' placeholder="English sentence translation..."></InputComp>
       <InputComp change={this.props.change} label="pictureURL" placeholder="Picture URL..."></InputComp>
 
-      <div id="center"> <button id="submitbutton" onClick={this.props.submit}>Submit </button></div>
+      <div id="center"> <button id="squareSubmitButton" onClick={this.props.submit}>Submit </button></div>
     </div>
     );
   }

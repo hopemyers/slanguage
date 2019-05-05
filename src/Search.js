@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import search from './images/search.png';
+import submit from './images/submit.png';
+import browse from './images/browse.png';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Search extends Component {
@@ -23,13 +26,11 @@ searchWords = () => {
 
 render() {
   return (
-    <div className="inputComp">
+    <div className="searchInputComp">
       <input className="searchinput" placeholder="Search..." onChange={this.searchFunction}></input>
-      <div id="center"><button id="submitbutton" onClick={this.searchWords}>Search </button></div>
-      <p id="ortext"> or </p>
-      <div id="center"><Link to="/Submit"><button id="submitwordbutton">Submit A New Word</button></Link></div>
-      <p id="ortext"> or </p>
-      <div id="center"><Link to="/Browse"><button id="browsebutton">Browse Dictionary</button></Link></div>
+      <button id="submitbutton" onClick={this.searchWords}><img id="searchIcon" src={search} alt="search"/></button>
+      <Link to="/Submit"><button id="submitwordbutton"><img id="submitIcon" src={submit} alt="submit new word"/></button></Link>
+      <Link to="/Browse"><button id="browsebutton"><img id="browseIcon" src={browse} alt="browse dictionary"/></button></Link>
     </div>
 );}
 }
