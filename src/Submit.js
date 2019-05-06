@@ -9,16 +9,14 @@ class Submit extends Component {
   // constructor(props){
   //   super(props);
   //   this.state = {
-  //     currentName: "",
+  //     nsfw: null,
   //   }
   // }
 
-  // updateName = (event) => {
-  //   this.setState({
-  //     currentName: event.target.value
-  //   });
-  // }
-
+changeColor = () => {
+  document.getElementById('nsfwbutton').style.color = "red";
+  this.props.nsfwTag(true)
+}
 
   render() {
     return (
@@ -37,6 +35,7 @@ class Submit extends Component {
       <InputComp change={this.props.change} label='chineseSentence' placeholder="Chinese example sentence..."></InputComp>
       <InputComp change={this.props.change} label='englishSentence' placeholder="English sentence translation..."></InputComp>
       <InputComp change={this.props.change} label="pictureURL" placeholder="Picture URL..."></InputComp>
+      <div id="nsfw">Tag as NSFW? <button id="nsfwbutton" onClick={this.changeColor}> &#10003; </button></div>
 
       <div id="center"> <button id="squareSubmitButton" onClick={this.props.submit}>Submit </button></div>
     </div>

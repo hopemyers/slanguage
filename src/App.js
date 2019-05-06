@@ -31,39 +31,8 @@ class App extends Component {
           english: 'Young handsome boy',
           chineseSentence: '昨天我看到一个小鲜肉，好帅！',
           englishSentence: "Yesterday, I saw a young handsome boy, and he is so gorgeous!",
-          pictureURL: ''
-        },
-        {
-          chinese: "牛",
-          pinyin: "Niú",
-          english: 'Cool, awesome',
-          chineseSentence: 'A:我这礼拜赚了一百万块。B: 你真牛',
-          englishSentence: "A: I earned 1 million dollars this week. B: Wow, you are so cool.",
-          pictureURL: ''
-        },
-        {
-          chinese: "萌",
-          pinyin: "Méng",
-          english: 'cute',
-          chineseSentence: '这个女生真萌',
-          englishSentence: "This girl is so cute",
-          pictureURL: ''
-        },
-        {
-          chinese: "戏精",
-          pinyin: "Xìjīng",
-          english: 'Drama queen, attention whore',
-          chineseSentence: '身边有一群戏精朋友真的是让人崩溃',
-          englishSentence: "Having a group of attention whores around really drives people crazy",
-          pictureURL: ''
-        },
-        {
-          chinese: "吃土",
-          pinyin: "Chī tǔ",
-          english: 'broke, poor',
-          chineseSentence: '我不去逛街了，最近要吃土了',
-          englishSentence: "I can't go shopping, I've been broke recently",
-          pictureURL: ''
+          pictureURL: '',
+          nsfw: false
         },
       ],
       currentChinese: '',
@@ -72,18 +41,11 @@ class App extends Component {
       currentChineseSentence: '',
       currentEnglishSentence: '',
       currentURL: '',
-      searchResult: {
-          chinese: null,
-          pinyin: null,
-          english: null,
-          chineseSentence: null,
-          englishSentence: null,
-          pictureURL: null}
+      currentNsfw: false,
+      searchResult: []
       // history of word?
       // tags like urban dictionary?
     }
-
-
   }
 
   // functions go Here
@@ -91,16 +53,16 @@ class App extends Component {
   showNames = () => {
       return Object.keys(this.state.newSlang).map((slang) => {
         const slangs = this.state.newSlang;
-        const haspic = this.state.newSlang.pictureURL;
         slang = slangs[slang];
         return(
         <div className="box">
           <p id="line1"><b>{slang.chinese}</b></p>
-          <p><b>Pinyin:</b> {slang.pinyin}</p>
+          <p><b>Pinyin: </b> {slang.pinyin}</p>
           <p><b>English Definition: </b>{slang.english}</p>
           <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>
           <p><b>English Example Sentence: </b> {slang.englishSentence}</p>
           {slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>: <p></p>}
+          {slang.nsfw ? <div id="nsfwTag"> (NSFW) </div>:<p></p>}
         </div>
       )
       }
@@ -108,31 +70,80 @@ class App extends Component {
   }
 
   showSearchResults = (searching) => {
+
+
+
+
+
+
+    // console.log(Object.keys(this.state.newSlang));
+
     let slangFilter = this.state.newSlang;
     console.log(slangFilter);
-    const filteredResults = Object.keys(this.state.newSlang).filter(key => this.state.newSlang[key].english === searching).map(key => {
+    const filteredResults = Object.keys(this.state.newSlang).filter(key => this.searchQuery(searching, this.state.newSlang[key].english) ).map(key => {
       return this.state.newSlang[key]
     })
     console.log(filteredResults);
-    this.setState({ searchResult: filteredResults[0]})
+    console.log(filteredResults);
+    this.setState({ searchResult: filteredResults})
+    console.log(searching)
   }
 
-  renderSearchResults = () => {
-    const slang = this.state.searchResult;
-    console.log(this.state.searchResult);
 
-      if (this.state.searchResult.english !== null){
-        return(
-      <div className="box">
-        <p id="line1"><b>{slang.chinese}</b></p>
-        <p><b>Pinyin:</b> {slang.pinyin}</p>
-        <p><b>English Definition: </b>{slang.english}</p>
-        <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>
-        <p><b>English Example Sentence: </b> {slang.englishSentence}</p>
-        {slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>: <p></p>}
-      </div>
-    )
+
+searchQuery = (query, potentialMatch) => {
+    let potMatchMinusPct = potentialMatch.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+
+    query = query.toLowerCase().replace(/[.,\/#!$@?%\^&\*;:{}=\-_`~()]/g,"").split(" ");
+
+    let match = true;
+    for(let i = 0; i < query.length; i++){
+      let currentWord = query[i];
+      if(potMatchMinusPct.indexOf(currentWord) == -1){
+        return false;
       }
+      if(i == query.length -1){
+        return true;
+      }
+    }
+  }
+
+
+
+  renderSearchResults = () => {
+
+    return this.state.searchResult.map((slang) => {
+        return(
+          <div className="box">
+            <p id="line1"><b>{slang.chinese}</b></p>
+            <p><b>Pinyin: </b> {slang.pinyin}</p>
+            <p><b>English Definition: </b>{slang.english}</p>
+            <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>
+            <p><b>English Example Sentence: </b> {slang.englishSentence}</p>
+            {slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>: <p></p>}
+            {slang.nsfw ? <div id="nsfwTag"> (NSFW) </div>:<p></p>}
+          </div>
+        )
+      }
+    );
+
+
+    // const slang = this.state.searchResult;
+    // console.log(this.state.searchResult);
+
+    //   if (this.state.searchResult.english !== null){
+    //     return(
+    //   <div className="box">
+    //     <p id="line1"><b>{slang.chinese}</b></p>
+    //     <p><b>Pinyin: </b> {slang.pinyin}</p>
+    //     <p><b>English Definition: </b>{slang.english}</p>
+    //     <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>
+    //     <p><b>English Example Sentence: </b> {slang.englishSentence}</p>
+    //     {slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>: <p></p>}
+    //     {slang.nsfw ? <div id="nsfwTag"> NSFW </div>:<p></p>}
+    //   </div>
+    // )
+    //   }
   }
 
 addThings = (message, label) => {
@@ -156,12 +167,17 @@ addThings = (message, label) => {
   }
 }
 
+nsfwState = (isItNsfw) => {
+  this.setState({currentNsfw: isItNsfw});
+  console.log(isItNsfw);
+}
+
 submitThings = () => {
-  let newArray = {chinese: this.state.currentChinese, pinyin: this.state.currentPinyin, english: this.state.currentEnglish, chineseSentence: this.state.currentChineseSentence, englishSentence: this.state.currentEnglishSentence, pictureURL: this.state.currentURL}
+  let newArray = {chinese: this.state.currentChinese, pinyin: this.state.currentPinyin, english: this.state.currentEnglish, chineseSentence: this.state.currentChineseSentence, englishSentence: this.state.currentEnglishSentence, pictureURL: this.state.currentURL, nsfw: this.state.currentNsfw}
 
   // let slangArray = this.state.newSlang.concat(newArray);
   // this.setState({newSlang: slangArray})
-
+  // debugger;
   firebase.database().ref("single-value").push(newArray);
   alert("Thank you for submitting a new word! Try looking it up in the dictionary :)");
 
@@ -177,12 +193,13 @@ componentDidMount() {
 }
 
   renderSubmit = () => {
-    return <Submit change={this.addThings} submit={this.submitThings}>   </Submit>
+    return <Submit change={this.addThings} submit={this.submitThings} nsfwTag={this.nsfwState}> </Submit>
   }
 
   searchPage = () => {
     return <div><Search term={this.showSearchResults}></Search>
-   {this.renderSearchResults()} <Random></Random>
+   {this.renderSearchResults()}
+   <Random slang={this.state.newSlang}></Random>
   </div>
   }
 
