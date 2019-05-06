@@ -26,14 +26,6 @@ class App extends Component {
     this.state = {
       newSlang: [
         {
-          chinese: "吃土",
-          pinyin: "Chī tǔ",
-          english: 'broke, poor',
-          chineseSentence: '我不去逛街了，最近要吃土了',
-          englishSentence: "I can't go shopping, I've been broke recently",
-          pictureURL: ''
-        },
-        {
           chinese: "小鲜肉",
           pinyin: "Xiǎo xiānròu",
           english: 'Young handsome boy',
@@ -63,6 +55,14 @@ class App extends Component {
           english: 'Drama queen, attention whore',
           chineseSentence: '身边有一群戏精朋友真的是让人崩溃',
           englishSentence: "Having a group of attention whores around really drives people crazy",
+          pictureURL: ''
+        },
+        {
+          chinese: "吃土",
+          pinyin: "Chī tǔ",
+          english: 'broke, poor',
+          chineseSentence: '我不去逛街了，最近要吃土了',
+          englishSentence: "I can't go shopping, I've been broke recently",
           pictureURL: ''
         },
       ],
