@@ -181,6 +181,37 @@ body {
   bottom: -20px;
 }
 
+#goHomeButton {
+  margin-top: 2%;
+  text-align: center;
+  width: 100px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: lightblue;
+  font-family: monospace;
+  font-size: 100%;
+  /* margin-bottom: 1%; */
+  border-color: lightgrey;
+  border-width: 2px;
+  border-radius: 10px;
+  margin-right: 5%;
+}
+
+#anotherWordButton {
+  margin-top: 2%;
+  text-align: center;
+  width: 350px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: lightblue;
+  font-family: monospace;
+  font-size: 100%;
+  /* margin-bottom: 1%; */
+  border-color: lightgrey;
+  border-width: 2px;
+  border-radius: 10px;
+}
+
 #browsebutton {
   /* margin-top: 1%; */
   text-align: center;
@@ -216,6 +247,16 @@ body {
 }
 
 #browsebutton:hover {
+  border-color: grey;
+  border-width: 2px;
+}
+
+#goHomeButton:hover {
+  border-color: grey;
+  border-width: 2px;
+}
+
+#anotherWordButton:hover {
   border-color: grey;
   border-width: 2px;
 }
@@ -328,11 +369,27 @@ height: 50px;
 #nsfwTag {
   position: relative;
   top: -20px;
-  right: -635px;
+  right: -590px;
   color: red;
   height: 15px;
   width: 50px;
   font-size: 150%;
   z-index: 1;
   font-family: monospace;
+}
+
+.submission {
+  text-align: center;
+  font-size: 200%;
+  margin-top: 4%;
+  margin-bottom: 24.7%;
+}
+
+#noResults {
+  text-align: center;
+  font-size: 150%;
+  margin-top: 4%;
+  width: 50%;
+  margin-left: 25%;
+  color: red;
 }

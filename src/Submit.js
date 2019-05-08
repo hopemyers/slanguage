@@ -35,9 +35,9 @@ changeColor = () => {
       <InputComp change={this.props.change} label='chineseSentence' placeholder="Chinese example sentence..."></InputComp>
       <InputComp change={this.props.change} label='englishSentence' placeholder="English sentence translation..."></InputComp>
       <InputComp change={this.props.change} label="pictureURL" placeholder="Picture URL..."></InputComp>
-      <div id="nsfw">Tag as NSFW? <button id="nsfwbutton" onClick={this.changeColor}> &#10003; </button></div>
+      <div id="nsfw">Tag as Explicit? <button id="nsfwbutton" onClick={this.changeColor}> &#10003; </button></div>
 
-      <div id="center"> <button id="squareSubmitButton" onClick={this.props.submit}>Submit </button></div>
+      <Link to="/Submission"><div id="center"> <button id="squareSubmitButton" onClick={this.props.submit}>Submit </button></div></Link>
     </div>
     );
   }

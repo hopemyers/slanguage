@@ -5,6 +5,7 @@ import Submit from './Submit.js';
 import Search from './Search.js';
 import Browse from './Browse.js';
 import Random from './Random.js';
+import Submission from './Submission.js';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import * as firebase from 'firebase';
@@ -36,13 +37,14 @@ class App extends Component {
         },
       ],
       currentChinese: '',
-      currentPinyin:'',
+      currentPinyin: '',
       currentEnglish: '',
       currentChineseSentence: '',
       currentEnglishSentence: '',
       currentURL: '',
       currentNsfw: false,
-      searchResult: []
+      searchResult: [null],
+      wordOfTheDay: ''
       // history of word?
       // tags like urban dictionary?
     }
@@ -52,31 +54,24 @@ class App extends Component {
 
   showNames = () => {
       return Object.keys(this.state.newSlang).map((slang) => {
-        const slangs = this.state.newSlang;
-        slang = slangs[slang];
-        return(
-        <div className="box">
-          <p id="line1"><b>{slang.chinese}</b></p>
-          <p><b>Pinyin: </b> {slang.pinyin}</p>
-          <p><b>English Definition: </b>{slang.english}</p>
-          <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>
-          <p><b>English Example Sentence: </b> {slang.englishSentence}</p>
-          {slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>: <p></p>}
-          {slang.nsfw ? <div id="nsfwTag"> (NSFW) </div>:<p></p>}
-        </div>
-      )
+          const slangs = this.state.newSlang;
+          slang = slangs[slang];
+          return(
+            <div className="box">
+              <p id="line1"><b>{slang.chinese}</b></p>
+              <p><b>Pinyin: </b> {slang.pinyin}</p>
+              <p><b>English Definition: </b>{slang.english}</p>
+              {slang.chineseSentence ? <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>: <p></p>}
+              {slang.englishSentence ? <p><b>English Example Sentence: </b> {slang.englishSentence}</p>: <p></p>}
+              {slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>: <p></p>}
+              {slang.nsfw ? <div id="nsfwTag"> (Explicit) </div>:<p></p>}
+            </div>
+        )
       }
     );
   }
 
   showSearchResults = (searching) => {
-
-
-
-
-
-
-    // console.log(Object.keys(this.state.newSlang));
 
     let slangFilter = this.state.newSlang;
     console.log(slangFilter);
@@ -85,11 +80,9 @@ class App extends Component {
     })
     console.log(filteredResults);
     console.log(filteredResults);
-    this.setState({ searchResult: filteredResults})
+    this.setState({searchResult: filteredResults})
     console.log(searching)
   }
-
-
 
 searchQuery = (query, potentialMatch) => {
     let potMatchMinusPct = potentialMatch.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
@@ -108,42 +101,31 @@ searchQuery = (query, potentialMatch) => {
     }
   }
 
-
-
   renderSearchResults = () => {
-
+  if (this.state.searchResult[0] === null){
+    return;
+    }
+  else if (this.state.searchResult.length === 0) {
+    return(
+      <div id="noResults"> This word is not currently in the dictionary, if you know a definition feel free to add it! </div>
+          )
+        }
+  else {
     return this.state.searchResult.map((slang) => {
-        return(
-          <div className="box">
-            <p id="line1"><b>{slang.chinese}</b></p>
-            <p><b>Pinyin: </b> {slang.pinyin}</p>
-            <p><b>English Definition: </b>{slang.english}</p>
-            <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>
-            <p><b>English Example Sentence: </b> {slang.englishSentence}</p>
-            {slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>: <p></p>}
-            {slang.nsfw ? <div id="nsfwTag"> (NSFW) </div>:<p></p>}
-          </div>
-        )
-      }
-    );
-
-
-    // const slang = this.state.searchResult;
-    // console.log(this.state.searchResult);
-
-    //   if (this.state.searchResult.english !== null){
-    //     return(
-    //   <div className="box">
-    //     <p id="line1"><b>{slang.chinese}</b></p>
-    //     <p><b>Pinyin: </b> {slang.pinyin}</p>
-    //     <p><b>English Definition: </b>{slang.english}</p>
-    //     <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>
-    //     <p><b>English Example Sentence: </b> {slang.englishSentence}</p>
-    //     {slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>: <p></p>}
-    //     {slang.nsfw ? <div id="nsfwTag"> NSFW </div>:<p></p>}
-    //   </div>
-    // )
-    //   }
+          return(
+            <div className="box">
+              <p id="line1"><b>{slang.chinese}</b></p>
+              <p><b>Pinyin: </b> {slang.pinyin}</p>
+              <p><b>English Definition: </b>{slang.english}</p>
+              {slang.chineseSentence ? <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>: <p></p>}
+              {slang.englishSentence ? <p><b>English Example Sentence: </b> {slang.englishSentence}</p>: <p></p>}
+              {slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>: <p></p>}
+              {slang.nsfw ? <div id="nsfwTag"> (Explicit) </div>:<p></p>}
+            </div>
+          )
+        }
+      );
+    }
   }
 
 addThings = (message, label) => {
@@ -179,15 +161,35 @@ submitThings = () => {
   // this.setState({newSlang: slangArray})
   // debugger;
   firebase.database().ref("single-value").push(newArray);
-  alert("Thank you for submitting a new word! Try looking it up in the dictionary :)");
-
 }
 
 componentDidMount() {
   firebase.database().ref("single-value").on("value", (snapshot) => {
-    // console.log(snapshot.val());
+    console.log(snapshot.val());
+    let slangArray = Object.keys(snapshot.val()).map(key => {
+      return snapshot.val()[key]
+    })
+
+    //get word of the day fro database (LATER in v2)
+    //check if day of word of the day is still today (LATER)
+
+    // if yes, store word of the day to APp.js state (LATER)
+
+    //if not, pic word of the day from array we just created
+
+    //push word of the day to database (LATER)
+
+    // store word of the day to App.js state
+
+    // (pass word of the day to Random.js component)
+
+    let randomNumber =  Math.floor(Math.random() * slangArray.length);
+    this.setState({wordOfTheDay: slangArray[randomNumber]})
+    console.log(this.state.wordOfTheDay)
+
+    console.log(slangArray)
     this.setState({
-      newSlang: snapshot.val()
+      newSlang: slangArray
     })
   });
 }
@@ -199,12 +201,16 @@ componentDidMount() {
   searchPage = () => {
     return <div><Search term={this.showSearchResults}></Search>
    {this.renderSearchResults()}
-   <Random slang={this.state.newSlang}></Random>
+   <Random slang={this.state.wordOfTheDay}></Random>
   </div>
   }
 
   browseWords = () => {
     return <Browse showNames={this.showNames}></Browse>
+  }
+
+  submissionComplete = () => {
+    return <Submission></Submission>
   }
 
   render() {
@@ -215,13 +221,12 @@ componentDidMount() {
 
             <Headline text={"Slanguage"} change={this.submissionPage}></Headline>
 
-
-
             <Route path="/" exact component={this.searchPage} />
             <Route path="/Headline" exact component={Headline} />
 
             <Route path="/Submit" exact component={ this.renderSubmit } />
             <Route path="/Browse" exact component={this.browseWords}/>
+            <Route path="/Submission" exact component={this.submissionComplete}/>
 
             <div id="bottombar">
                   <p id="copyright"> &#9400; NYU Shanghai</p>
@@ -235,25 +240,3 @@ componentDidMount() {
     }
 
 export default App;
-
-
-
-
-// <div className="App">
-//
-//
-//
-//   <Headline text={"Slanguage"} change={this.submissionPage}></Headline>
-//
-//
-//     <Search></Search>
-//
-//       <div className="display">
-//       {this.showNames()}
-//       </div>
-//
-//       <div id="bottombar">
-//       <p id="copyright"> &#9400; NYU Shanghai</p>
-//       </div>
-//
-//     </div>

@@ -12,23 +12,23 @@ class Random extends Component {
   }
 
 componentDidMount() {
-  let randomNumber =  Math.floor(Math.random() * this.props.slang.length);
-  this.setState({chosenSlang: this.props.slang[randomNumber]})
+  // let randomNumber =  Math.floor(Math.random() * this.props.slang.length);
+  // this.setState({chosenSlang: this.props.slang[randomNumber]})
   // let randomSlang = Object.keys(this.state.chosenSlang);
+  console.log(this.props.slang)
 }
 
   render() {
     return (
       <div className="randomWordBox">
       <p id="center" id="wordOfTheDay"> Word of the day </p>
-      <p id="line1"><b>{this.state.chosenSlang.chinese}</b></p>
-      <p><b>Pinyin: </b>{this.state.chosenSlang.pinyin}</p>
-      <p><b>English Definition: </b>{this.state.chosenSlang.english}</p>
-      <p><b>Chinese Example Sentence: </b> {this.state.chosenSlang.chineseSentence}</p>
-      <p><b>English Example Sentence: </b> {this.state.chosenSlang.englishSentence} </p>
-      {this.state.chosenSlang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={this.state.chosenSlang.pictureURL}></img></p>: <p></p>}
-      {this.state.chosenSlang.nsfw ? <div id="nsfwTag"> NSFW </div>:<p></p>}
-
+      <p id="line1"><b>{this.props.slang.chinese}</b></p>
+      <p><b>Pinyin: </b>{this.props.slang.pinyin}</p>
+      <p><b>English Definition: </b>{this.props.slang.english}</p>
+      <p><b>Chinese Example Sentence: </b> {this.props.slang.chineseSentence}</p>
+      <p><b>English Example Sentence: </b> {this.props.slang.englishSentence} </p>
+      {this.props.slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={this.props.slang.pictureURL}></img></p>: <p></p>}
+      {this.props.slang.nsfw ? <div id="nsfwTag"> (Explicit) </div>:<p></p>}
       </div>
     )
     }
