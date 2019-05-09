@@ -393,3 +393,125 @@ height: 50px;
   margin-left: 25%;
   color: red;
 }
+
+@media only screen and (max-width: 600px) {
+
+.headline {
+  font-size: 1.8em;
+  padding-bottom: 5%;
+}
+
+#smallwords {
+  text-align: center;
+  font-size: 70%;
+  margin-left: 50%;
+  margin-top: -40px;
+  font-family: 'ZCOOL KuaiLe', cursive;
+}
+
+.searchinput {
+  width: 90%;
+  height: 70px;
+  margin-bottom: 0%;
+  margin-top: 4%;
+  margin-left: 0%;
+  font-size: 100%;
+  border-color: lightgrey;
+  border-radius: 10px;
+  font-family: monospace;
+  font-size: 106%;
+}
+
+.searchInputComp {
+  margin-bottom: 10%;
+  text-align: center;
+}
+
+.randomWordBox {
+  border-color: lightblue;
+  border-width: 3px;
+  border-style: solid;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 4%;
+  background-color: white;
+}
+
+.picture {
+  width: 90%;
+}
+
+.box {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#homebutton {
+  margin-top: -20%;
+  width: 40px;
+  height: 40px;
+}
+
+#description {
+  margin-right: 22%;
+  margin-left: 22%;
+  text-align: center;
+}
+
+.inputComp {
+  margin-left: 5%;
+  width: 90%;
+}
+
+#nsfw {
+  margin-bottom: 1%;
+}
+
+#star1 {
+  top: 230px;
+  left: 300px;
+}
+
+#star2 {
+  left: 300px;
+  top: 317.5px;
+}
+
+#star3 {
+  left: 300px;
+  top: 405px;
+}
+
+#star4 {
+  left: 300px;
+  top: 492.5px;
+}
+
+#star5 {
+  left: 300px;
+  top: 580px;
+}
+
+#anotherWordButton {
+  width: 90%;
+  margin-top: 8%;
+}
+
+#goHomeButton {
+  margin-top: 0%;
+}
+
+#noResults {
+  width: 90%;
+  margin-left: 5%;
+}
+
+#nsfwTag {
+  right: -207px;
+  top: -4px;
+  font-size: 100%;
+}
+
+}
