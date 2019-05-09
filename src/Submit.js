@@ -22,11 +22,7 @@ changeColor = () => {
     return (
       <div>
       <Link to="/"><img id="homebutton" src={home} alt="home"/></Link>
-      <img id="star1" className="star" src={star} alt="required"/>
-      <img id="star2" className="star" src={star} alt="required"/>
-      <img id="star3" className="star" src={star} alt="required"/>
-      <img id="star4" className="star" src={star} alt="required"/>
-      <img id="star5" className="star" src={star} alt="required"/>
+
       <p id="description"> Submit a new word or phrase:</p>
 
       <InputComp change={this.props.change} label='chinese' placeholder="Chinese characters..."></InputComp>
@@ -47,3 +43,9 @@ changeColor = () => {
 
 
 export default Submit;
+
+// <img id="star1" className="star" src={star} alt="required"/>
+// <img id="star2" className="star" src={star} alt="required"/>
+// <img id="star3" className="star" src={star} alt="required"/>
+// <img id="star4" className="star" src={star} alt="required"/>
+// <img id="star5" className="star" src={star} alt="required"/>
