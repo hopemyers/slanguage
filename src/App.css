@@ -367,15 +367,17 @@ height: 50px;
 }
 
 #nsfwTag {
-  position: relative;
+  /* position: relative;
   top: -20px;
-  right: -590px;
+  right: -590px; */
   color: red;
   height: 15px;
   width: 50px;
   font-size: 150%;
   z-index: 1;
   font-family: monospace;
+  margin-left: 83%;
+  margin-bottom: 2%;
 }
 
 .submission {
@@ -469,31 +471,6 @@ height: 50px;
   margin-bottom: 1%;
 }
 
-#star1 {
-  top: 230px;
-  left: 300px;
-}
-
-#star2 {
-  left: 300px;
-  top: 317.5px;
-}
-
-#star3 {
-  left: 300px;
-  top: 405px;
-}
-
-#star4 {
-  left: 300px;
-  top: 492.5px;
-}
-
-#star5 {
-  left: 300px;
-  top: 580px;
-}
-
 #anotherWordButton {
   width: 90%;
   margin-top: 8%;
@@ -509,9 +486,9 @@ height: 50px;
 }
 
 #nsfwTag {
-  right: -207px;
-  top: -4px;
-  font-size: 100%;
+  /* font-size: 10%; */
+  margin-left: 59%;
+  margin-bottom: 4%;
 }
 
 }

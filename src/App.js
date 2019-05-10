@@ -64,7 +64,7 @@ class App extends Component {
               {slang.chineseSentence ? <p><b>Chinese Example Sentence: </b> {slang.chineseSentence}</p>: <p></p>}
               {slang.englishSentence ? <p><b>English Example Sentence: </b> {slang.englishSentence}</p>: <p></p>}
               {slang.pictureURL ? <p id="centerpic"> <img className="picture" alt="picture" src={slang.pictureURL}></img></p>: <p></p>}
-              {slang.nsfw ? <div id="nsfwTag"> (Explicit) </div>:<p></p>}
+              {slang.nsfw ? <p id="nsfwTag"> (Explicit) </p>:<p></p>}
             </div>
         )
       }
