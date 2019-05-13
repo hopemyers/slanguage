@@ -229,7 +229,7 @@ componentDidMount() {
             <Route path="/Submission" exact component={this.submissionComplete}/>
 
             <div id="bottombar">
-                  <p id="copyright"> &#9400; NYU Shanghai</p>
+                  <p id="copyright"> &#9400; Hope Myers</p>
                   </div>
 
           </div>
