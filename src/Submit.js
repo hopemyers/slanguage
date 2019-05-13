@@ -33,7 +33,7 @@ changeColor = () => {
       <InputComp change={this.props.change} label="pictureURL" placeholder="Picture URL..."></InputComp>
       <div id="nsfw">Tag as Explicit? <button id="nsfwbutton" onClick={this.changeColor}> &#10003; </button></div>
 
-      // <Link to="/Submission"><div id="center"> <button id="squareSubmitButton" onClick={this.props.submit}>Submit </button></div></Link>
+
     </div>
     );
   }
@@ -49,3 +49,6 @@ export default Submit;
 // <img id="star3" className="star" src={star} alt="required"/>
 // <img id="star4" className="star" src={star} alt="required"/>
 // <img id="star5" className="star" src={star} alt="required"/>
+
+
+// <Link to="/Submission"><div id="center"> <button id="squareSubmitButton" onClick={this.props.submit}>Submit </button></div></Link>
