@@ -33,7 +33,7 @@ changeColor = () => {
       <InputComp change={this.props.change} label="pictureURL" placeholder="Picture URL..."></InputComp>
       <div id="nsfw">Tag as Explicit? <button id="nsfwbutton" onClick={this.changeColor}> &#10003; </button></div>
 
-      <Link to="/Submission"><div id="center"> <button id="squareSubmitButton" onClick={this.props.submit}>Submit </button></div></Link>
+      // <Link to="/Submission"><div id="center"> <button id="squareSubmitButton" onClick={this.props.submit}>Submit </button></div></Link>
     </div>
     );
   }
